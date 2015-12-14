@@ -39,6 +39,7 @@
     "rimraf": "^2.4.3",
     "source-map-support": "^0.3.2",
     "swagger-tools": "^0.9.9",
+    "swagger-ui": "swagger-api/swagger-ui#63f6edeef089d142fdb9bb5ac143421158476656",
     "ts-loader": "^0.6.1",
     "tsd": "^0.6.4",
     "tslint-loader": "^1.0.2",

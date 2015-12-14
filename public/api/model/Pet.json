@@ -7,13 +7,16 @@
   "properties": {
     "id": {
       "type": "integer",
-      "format": "int64"
+      "format": "int64",
+      "example": 321
     },
     "name": {
-      "type": "string"
+      "type": "string",
+      "example": "Kitty"
     },
     "tag": {
-      "type": "string"
+      "type": "string",
+      "example": "cats"
     }
   }
 }

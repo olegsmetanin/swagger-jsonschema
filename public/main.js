@@ -49,7 +49,7 @@
 	var Validator = __webpack_require__(1).Validator;
 	var v = new Validator();
 	var pc = __webpack_require__(11);
-	v.addSchema(pc, '/Zoo');
+	v.addSchema(pc, '/Zoo.json');
 
 	function importNextSchema() {
 	  var nextSchema = v.unresolvedRefs.shift();
@@ -57,6 +57,7 @@
 	    return;
 	  }
 	  v.addSchema(__webpack_require__(12)("./model" + nextSchema), nextSchema);
+	  importNextSchema();
 	}
 
 	importNextSchema();
@@ -2894,7 +2895,8 @@
 		"properties": {
 			"id": {
 				"type": "integer",
-				"format": "int64"
+				"format": "int64",
+				"example": 123
 			},
 			"pets": {
 				"$ref": "PetCollection.json"
@@ -2907,9 +2909,14 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./model/Pet.json": 13,
-		"./model/PetCollection.json": 14,
-		"./model/Zoo.json": 11
+		"./model/Error.json": 13,
+		"./model/Location.json": 14,
+		"./model/NewPet.json": 15,
+		"./model/Pet.json": 16,
+		"./model/PetCollection.json": 17,
+		"./model/Weather.json": 18,
+		"./model/Zoo.json": 11,
+		"./model/parameters.json": 19
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -2932,18 +2939,15 @@
 	module.exports = {
 		"type": "object",
 		"required": [
-			"id",
-			"name"
+			"code",
+			"message"
 		],
 		"properties": {
-			"id": {
+			"code": {
 				"type": "integer",
-				"format": "int64"
+				"format": "int32"
 			},
-			"name": {
-				"type": "string"
-			},
-			"tag": {
+			"message": {
 				"type": "string"
 			}
 		}
@@ -2954,9 +2958,149 @@
 /***/ function(module, exports) {
 
 	module.exports = {
+		"type": "object",
+		"properties": {
+			"name": {
+				"type": "string"
+			},
+			"zipcode": {
+				"type": "string"
+			},
+			"lat": {
+				"type": "string"
+			},
+			"long": {
+				"type": "string"
+			},
+			"timezone": {
+				"type": "string"
+			},
+			"alert": {
+				"type": "string"
+			},
+			"degreetype": {
+				"type": "string",
+				"enum": [
+					"C",
+					"F"
+				]
+			},
+			"imagerelativeurl": {
+				"type": "string"
+			}
+		},
+		"required": [
+			"name",
+			"lat",
+			"long",
+			"timezone",
+			"degreetype"
+		]
+	};
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"type": "object",
+		"allOf": [
+			{
+				"$ref": "Pet.json"
+			},
+			{
+				"required": [
+					"name"
+				],
+				"properties": {
+					"description": {
+						"type": "integer",
+						"format": "int64"
+					}
+				}
+			}
+		]
+	};
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"type": "object",
+		"required": [
+			"id",
+			"name"
+		],
+		"properties": {
+			"id": {
+				"type": "integer",
+				"format": "int64",
+				"example": 321
+			},
+			"name": {
+				"type": "string",
+				"example": "Kitty"
+			},
+			"tag": {
+				"type": "string",
+				"example": "cats"
+			}
+		}
+	};
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	module.exports = {
 		"type": "array",
 		"items": {
 			"$ref": "Pet.json"
+		}
+	};
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"properties": {
+			"location": {
+				"$ref": "Location.json"
+			},
+			"abc": {
+				"type": "string"
+			}
+		},
+		"required": [
+			"location"
+		]
+	};
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"tagsParam": {
+			"name": "tags",
+			"in": "query",
+			"description": "tags to filter by",
+			"required": false,
+			"type": "array",
+			"collectionFormat": "csv",
+			"items": {
+				"type": "string"
+			}
+		},
+		"limitsParam": {
+			"name": "limit",
+			"in": "query",
+			"description": "maximum number of results to return",
+			"required": false,
+			"type": "integer",
+			"format": "int32"
 		}
 	};
 

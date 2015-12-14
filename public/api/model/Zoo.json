@@ -7,7 +7,8 @@
   "properties": {
     "id": {
       "type": "integer",
-      "format": "int64"
+      "format": "int64",
+      "example": 123
     },
     "pets": {
       "$ref": "PetCollection.json"

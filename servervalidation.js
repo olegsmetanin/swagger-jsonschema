@@ -1,21 +1,26 @@
 var Validator = require('jsonschema').Validator;
 var v = new Validator();
 
-var pc = require('./PetCollection.json');
-v.addSchema(pc, '/PetCollection');
+var pc = require('./public/api/model/Zoo.json');
+v.addSchema(pc, '/Zoo');
 
 function importNextSchema() {
   var nextSchema = v.unresolvedRefs.shift();
+  console.log('nextSchema', nextSchema);
   if (!nextSchema) {
     return;
   }
-  v.addSchema(require(nextSchema), nextSchema);
+  v.addSchema(require('./public/api/model' + nextSchema), nextSchema);
+  importNextSchema();
 }
 
 importNextSchema();
 
-var instance = [{
-  id: 12,
-  name: 'asd'
-}];
+var instance = {
+  id: 123,
+  pets: [{
+    id: 12,
+    name: 'asd'
+  }]
+};
 console.log(v.validate(instance, pc));

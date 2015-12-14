@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "location": {
+      "$ref": "Location.json"
+    },
+    "abc": {
+      "type": "string"
+    }
+  },
+  "required": ["location"]
+}

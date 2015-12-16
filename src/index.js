@@ -17,7 +17,7 @@ importNextSchema();
 var instance = {
   id: 123,
   pets: [{
-    id: 'qwe',
+    id: 234,
     name: 'asd'
   }]
 };

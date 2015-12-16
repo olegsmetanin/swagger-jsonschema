@@ -65,7 +65,7 @@
 	var instance = {
 	  id: 123,
 	  pets: [{
-	    id: 'qwe',
+	    id: 234,
 	    name: 'asd'
 	  }]
 	};
@@ -2910,13 +2910,10 @@
 
 	var map = {
 		"./model/Error.json": 13,
-		"./model/Location.json": 14,
-		"./model/NewPet.json": 15,
-		"./model/Pet.json": 16,
-		"./model/PetCollection.json": 17,
-		"./model/Weather.json": 18,
-		"./model/Zoo.json": 11,
-		"./model/parameters.json": 19
+		"./model/Id.json": 14,
+		"./model/Pet.json": 15,
+		"./model/PetCollection.json": 16,
+		"./model/Zoo.json": 11
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -2960,42 +2957,12 @@
 	module.exports = {
 		"type": "object",
 		"properties": {
-			"name": {
-				"type": "string"
-			},
-			"zipcode": {
-				"type": "string"
-			},
-			"lat": {
-				"type": "string"
-			},
-			"long": {
-				"type": "string"
-			},
-			"timezone": {
-				"type": "string"
-			},
-			"alert": {
-				"type": "string"
-			},
-			"degreetype": {
-				"type": "string",
-				"enum": [
-					"C",
-					"F"
-				]
-			},
-			"imagerelativeurl": {
-				"type": "string"
+			"id": {
+				"type": "integer",
+				"format": "int64",
+				"example": 321
 			}
-		},
-		"required": [
-			"name",
-			"lat",
-			"long",
-			"timezone",
-			"degreetype"
-		]
+		}
 	};
 
 /***/ },
@@ -3004,18 +2971,24 @@
 
 	module.exports = {
 		"type": "object",
+		"required": [
+			"id",
+			"name"
+		],
 		"allOf": [
 			{
-				"$ref": "Pet.json"
+				"$ref": "Id.json"
 			},
 			{
-				"required": [
-					"name"
-				],
+				"type": "object",
 				"properties": {
-					"description": {
-						"type": "integer",
-						"format": "int64"
+					"name": {
+						"type": "string",
+						"example": "Kitty"
+					},
+					"tag": {
+						"type": "string",
+						"example": "cats"
 					}
 				}
 			}
@@ -3027,80 +3000,9 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-		"type": "object",
-		"required": [
-			"id",
-			"name"
-		],
-		"properties": {
-			"id": {
-				"type": "integer",
-				"format": "int64",
-				"example": 321
-			},
-			"name": {
-				"type": "string",
-				"example": "Kitty"
-			},
-			"tag": {
-				"type": "string",
-				"example": "cats"
-			}
-		}
-	};
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	module.exports = {
 		"type": "array",
 		"items": {
 			"$ref": "Pet.json"
-		}
-	};
-
-/***/ },
-/* 18 */
-/***/ function(module, exports) {
-
-	module.exports = {
-		"properties": {
-			"location": {
-				"$ref": "Location.json"
-			},
-			"abc": {
-				"type": "string"
-			}
-		},
-		"required": [
-			"location"
-		]
-	};
-
-/***/ },
-/* 19 */
-/***/ function(module, exports) {
-
-	module.exports = {
-		"tagsParam": {
-			"name": "tags",
-			"in": "query",
-			"description": "tags to filter by",
-			"required": false,
-			"type": "array",
-			"collectionFormat": "csv",
-			"items": {
-				"type": "string"
-			}
-		},
-		"limitsParam": {
-			"name": "limit",
-			"in": "query",
-			"description": "maximum number of results to return",
-			"required": false,
-			"type": "integer",
-			"format": "int32"
 		}
 	};
 

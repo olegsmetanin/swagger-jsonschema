@@ -23,4 +23,4 @@ var instance = {
     name: 'asd'
   }]
 };
-console.log(v.validate(instance, pc));
+console.log(JSON.stringify(v.validate(instance, pc), null, 2));

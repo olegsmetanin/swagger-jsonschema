@@ -4,19 +4,19 @@
     "id",
     "name"
   ],
-  "properties": {
-    "id": {
-      "type": "integer",
-      "format": "int64",
-      "example": 321
-    },
-    "name": {
-      "type": "string",
-      "example": "Kitty"
-    },
-    "tag": {
-      "type": "string",
-      "example": "cats"
+  "allOf": [{
+    "$ref": "Id.json"
+  }, {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "example": "Kitty"
+      },
+      "tag": {
+        "type": "string",
+        "example": "cats"
+      }
     }
-  }
+  }]
 }
